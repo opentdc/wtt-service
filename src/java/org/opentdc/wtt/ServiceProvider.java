@@ -1,46 +1,37 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Arbalo AG
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package org.opentdc.wtt;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.opentdc.exception.DuplicateException;
-import org.opentdc.exception.InternalServerErrorException;
-import org.opentdc.exception.NotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.opentdc.service.exception.DuplicateException;
+import org.opentdc.service.exception.InternalServerErrorException;
+import org.opentdc.service.exception.NotFoundException;
 
-public abstract class ServiceProvider {
-	protected static ArrayList<CompanyModel> companies = null;
-	protected static Map<String, CompanyModel> companyIndex = null;
-	protected static Map<String, ProjectModel> projectIndex = null;
-	protected static ArrayList<String> resources = null;
+public interface ServiceProvider {
 	
-	// instance variables
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
-	public void initStorageProvider() {
-		logger.info("> initStorageProvider()");
-
-		if (companies == null) {
-			companies = new ArrayList<CompanyModel>();
-		}
-		if (companyIndex == null) {
-			companyIndex = new HashMap<String, CompanyModel>();
-		}
-		if (projectIndex == null) {
-			projectIndex = new HashMap<String, ProjectModel>();
-		}
-		if (resources == null) {
-			resources = new ArrayList<String>();
-		}
-
-		logger.info("initStorageProvider() initialized");
-	}
-
-
-	/************************* companies *****************************/
-	public abstract ArrayList<CompanyModel> listCompanies(
+	public abstract List<CompanyModel> listCompanies(
 			boolean asTree,
 			String query, 
 			String queryType, 
@@ -66,14 +57,14 @@ public abstract class ServiceProvider {
 	public abstract int countCompanies();
 
 	/************************* projects *****************************/
-	public abstract ArrayList<ProjectModel> listProjects(
+	public abstract List<ProjectModel> listProjects(
 			String compId,
 			String query, 
 			String queryType, 
 			long position, 
 			long size);
 
-	public abstract ArrayList<ProjectModel> listAllProjects(
+	public abstract List<ProjectModel> listAllProjects(
 			String compId, 
 			boolean asTree,
 			String query, 
@@ -110,7 +101,7 @@ public abstract class ServiceProvider {
 			String compId);
 
 	/******************************** resource ***********************/
-	public abstract ArrayList<ResourceModel> listResources(
+	public abstract List<ResourceModel> listResources(
 			String projId,
 			String query, 
 			String queryType, 
