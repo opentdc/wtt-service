@@ -25,9 +25,11 @@ package org.opentdc.wtt;
 
 import java.util.Arrays;
 
-/*
-Fixing Serialization bug in Jettison.
-*/
+/**
+ * Configure default JSON provider.
+ * 
+ * @param <T>
+ */
 public class WttProvider<T> extends org.apache.cxf.jaxrs.provider.json.JSONProvider<T> {
 
 	public WttProvider(

@@ -87,7 +87,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	) throws ReflectiveOperationException {
 		logger.info("> WttService()");
 		if (sp == null) {
-			sp = this.getServiceProvider(context);
+			sp = this.getServiceProvider(WttService.class, context);
 		}
 		logger.info("WttService() initialized");
 	}
