@@ -47,12 +47,13 @@ public interface ServiceProvider {
 					throws NotFoundException;
 
 	public abstract CompanyModel updateCompany(
-			CompanyModel company) 
-					throws NotFoundException;
+			String compId,
+			CompanyModel company
+	)  throws NotFoundException;
 
 	public abstract void deleteCompany(
-			String id) 
-					throws NotFoundException, InternalServerErrorException;
+			String id
+	) throws NotFoundException, InternalServerErrorException;
 
 	public abstract int countCompanies();
 
@@ -88,14 +89,15 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract ProjectModel updateProject(
-			String compId, 
-			ProjectModel project)
-		throws NotFoundException;
+			String compId,
+			String projId,
+			ProjectModel project
+	) throws NotFoundException;
 
 	public abstract void deleteProject(
-			String compId, 
-			String projId)
-		throws NotFoundException, InternalServerErrorException;
+		String compId, 
+		String projId
+	) throws NotFoundException, InternalServerErrorException;
 
 	public abstract int countProjects(
 			String compId);

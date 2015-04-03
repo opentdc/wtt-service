@@ -60,17 +60,6 @@ import org.opentdc.service.exception.NotFoundException;
 public class WttService extends GenericService<ServiceProvider> {
 	
 	private static ServiceProvider sp = null;
-	// query: a semicolon-separated list of query verbs. e.g. modifiedAt();lessThan(3);orderByFirstName();ascending()
-	private static final String DEFAULT_QUERY = "";
-	// queryType: specifies the type of objects to be returned
-	// TODO: how to make queryTypes generic, i.e. independent of serviceProviders ?
-	private static final String DEFAULT_QUERY_TYPE = "";
-	// position: the result set starts from the given position. 
-	// Increasing the position by a batch size allows to iterate the result set.
-	// hasMore=false indicates that there are no more objects to be returned
-	private static final String DEFAULT_POSITION = "0";
-	// size: specifies the batch size, i.e. the amount of records returned starting from position.
-	private static final String DEFAULT_SIZE = "25";
 
 	// instance variables
 	private static final Logger logger = Logger.getLogger(WttService.class.getName());
@@ -94,10 +83,11 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
 	public List<CompanyModel> listCompanies(
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size) {
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+	) {
 		return sp.listCompanies(false, query, queryType, position, size);
 	}
 	
@@ -131,13 +121,14 @@ public class WttService extends GenericService<ServiceProvider> {
 	}
 
 	@PUT
-	@Path("/")
+	@Path("/{cid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel updateCompany(
+		@PathParam("cid") String compId,
 		CompanyModel company
 	) throws NotFoundException {
-		return sp.updateCompany(company);
+		return sp.updateCompany(compId, company);
 	}
 
 	@DELETE
@@ -229,14 +220,15 @@ public class WttService extends GenericService<ServiceProvider> {
 	}
 
 	@PUT
-	@Path("/{cid}/project")
+	@Path("/{cid}/project/{pid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel updateProject(
 		@PathParam("cid") String compId,
+		@PathParam("pid") String projId,
 		ProjectModel project
 	) throws NotFoundException {
-		return sp.updateProject(compId, project);
+		return sp.updateProject(compId, projId, project);
 	}
 
 	@DELETE
