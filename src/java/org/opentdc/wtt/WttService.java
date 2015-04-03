@@ -48,18 +48,10 @@ import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
 
-/**
- * CXFNonSpringJaxrsServlet (defined in web.xml) uses Singleton as a default
- * scope for service classes specified by a jaxrs.serviceClasses servlet
- * parameter.
- * 
- * @author Bruno Kaiser
- *
- */
 @Path("/api/company")
 public class WttService extends GenericService<ServiceProvider> {
 	
-	private static ServiceProvider sp = null;
+	private ServiceProvider sp = null;
 
 	// instance variables
 	private static final Logger logger = Logger.getLogger(WttService.class.getName());
