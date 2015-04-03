@@ -57,9 +57,6 @@ import org.opentdc.service.exception.NotFoundException;
  *
  */
 @Path("/api/company")
-// @Api(value = "/company", description="API for work time tracking (wtt)")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class WttService extends GenericService<ServiceProvider> {
 	
 	private static ServiceProvider sp = null;
@@ -76,7 +73,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	private static final String DEFAULT_SIZE = "25";
 
 	// instance variables
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private static final Logger logger = Logger.getLogger(WttService.class.getName());
 
 	/**
 	 * Invoked for each service invocation (Constructor)
@@ -94,6 +91,7 @@ public class WttService extends GenericService<ServiceProvider> {
 
 	/******************************** company *****************************************/
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/")
 	public List<CompanyModel> listCompanies(
 			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
@@ -105,7 +103,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	
 	@GET
 	@Path("/astree")
-// 	@ApiOperation(value="List all companies", notes="", response = List<CompanyData>.class)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<CompanyModel> listCompaniesAsTree(
 			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
@@ -116,173 +114,195 @@ public class WttService extends GenericService<ServiceProvider> {
 
 	@POST
 	@Path("/")
-// 	@ApiOperation(value="Create a new company", notes="", response = CompanyData.class)
-//	@ApiResponse(value= {
-//			@ApiResponse(code = 409, message = "Company already exists")
-//	})
+	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel createCompany(
-//			@ApiParam(value="The new company") 
-			CompanyModel company) 
-			throws DuplicateException {
+		CompanyModel company
+	) throws DuplicateException {
 		return sp.createCompany(company); 
 	}
 
 	@GET
 	@Path("/{cid}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel readCompany(
-			@PathParam("cid") String compId)
-			throws NotFoundException {
+		@PathParam("cid") String compId
+	) throws NotFoundException {
 		return sp.readCompany(compId);
 	}
 
 	@PUT
 	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel updateCompany(
-			CompanyModel company) 
-			throws NotFoundException {
+		CompanyModel company
+	) throws NotFoundException {
 		return sp.updateCompany(company);
 	}
 
 	@DELETE
 	@Path("/{cid}")
 	public void deleteCompany(
-			@PathParam("cid") String compId)
-			throws NotFoundException, InternalServerErrorException {
+		@PathParam("cid") String compId
+	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteCompany(compId);
 	}
 
 	@GET
 	@Path("/count")
-	public int countCompanies() {
+	public int countCompanies(
+	) {
 		return sp.countCompanies();
 	}
 
 	/********************************** project ***************************************/
 	@GET
 	@Path("/{cid}/project")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProjectModel> listProjects(
-			@PathParam("cid") String compId,
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size) {
+		@PathParam("cid") String compId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size"
+	) long size) {
 		return sp.listProjects(compId, query, queryType, position, size);
 	}
 
 	@GET
 	@Path("/{cid}/project/flat")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProjectModel> listAllProjectsFlat(
-			@PathParam("cid") String compId,
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size) {
+		@PathParam("cid") String compId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+	) {
 		return sp.listAllProjects(compId, false, query, queryType, position, size);
 	}
 
 	@GET
 	@Path("/{cid}/project/astree")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProjectModel> listAllProjectsAsTree(
-			@PathParam("cid") String compId,
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size) {
+		@PathParam("cid") String compId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+	) {
 		return sp.listAllProjects(compId, true, query, queryType, position, size);
 	}
 
 	@POST
 	@Path("/{cid}/project")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel createProject(
-			@PathParam("cid") String compId, 
-			ProjectModel project) 
-				throws DuplicateException {
+		@PathParam("cid") String compId, 
+		ProjectModel project
+	) throws DuplicateException, NotFoundException {
 		return sp.createProject(compId, project);
 	}
 
 	@POST
 	@Path("/{cid}/project/{pid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel createProject(
-			@PathParam("cid") String compId, 
-			@PathParam("pid") String projId,
-			ProjectModel project) 
-				throws DuplicateException {
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId,
+		ProjectModel project
+	) throws DuplicateException {
 		return sp.createProjectAsSubproject(compId, projId, project);
 	}
 	
 	@GET
 	@Path("/{cid}/project/{pid}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel readProject(
-			@PathParam("cid") String compId,
-			@PathParam("pid") String projId) 
-				throws NotFoundException {
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId
+	) throws NotFoundException {
 		return sp.readProject(projId);
 	}
 
 	@PUT
 	@Path("/{cid}/project")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel updateProject(
-			@PathParam("cid") String compId,
-			ProjectModel project) 
-					throws NotFoundException {
+		@PathParam("cid") String compId,
+		ProjectModel project
+	) throws NotFoundException {
 		return sp.updateProject(compId, project);
 	}
 
 	@DELETE
 	@Path("/{cid}/project/{pid}")
 	public void deleteProject(
-			@PathParam("cid") String compId,
-			@PathParam("pid") String projId) 
-					throws NotFoundException, InternalServerErrorException {
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId
+	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteProject(compId, projId);
 	}
 
 	@GET
 	@Path("/{cid}/project/count")
 	public int countProjects(
-			@PathParam("cid") String compId) {
+		@PathParam("cid") String compId
+	) {
 		return sp.countProjects(compId);
 	}
 
 	/******************************** resource *****************************************/
 	@GET
 	@Path("/{cid}/project/{pid}/resource")
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<ResourceModel> listResources(
-			@PathParam("cid") String compId, 
-			@PathParam("pid") String projId,
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size)
-		throws NotFoundException {
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+	) throws NotFoundException {
 		return sp.listResources(projId, query, queryType, position, size);
 	}
 
 	@POST
 	@Path("/{cid}/project/{pid}/resource")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public String addResource(
-			@PathParam("cid") String compId, 
-			@PathParam("pid") String projId, String rid) 
-		throws NotFoundException, DuplicateException {
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId, String rid
+	) throws NotFoundException, DuplicateException {
 		return sp.addResource(projId, rid);
 	}
 
 	@DELETE
 	@Path("/{cid}/project/{pid}/resource/{rid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public void deleteResource(
-			@PathParam("cid") String compId, 
-			@PathParam("pid") String projId, 
-			@PathParam("rid") String resourceId)
-			throws NotFoundException {
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId, 
+		@PathParam("rid") String resourceId
+	) throws NotFoundException {
 		sp.removeResource(projId, resourceId);
 	}
 
 	@GET
 	@Path("/{cid}/project/{pid}/resource/count")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public int countResources(
-			@PathParam("cid") String compId, 
-			@PathParam("pid") String projId) 
-		throws NotFoundException {
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId
+	) throws NotFoundException {
 		return sp.countResources(projId);
 	}
+	
 }
