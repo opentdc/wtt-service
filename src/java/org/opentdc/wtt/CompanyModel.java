@@ -50,7 +50,6 @@ public class CompanyModel {
 
 	/******************************* Constructors *****************************/
 	public CompanyModel() {
-		this.id = UUID.randomUUID().toString();
 		this.xri = DEF_XRI;
 		this.title = DEF_TITLE;
 		this.description = DEF_DESC;
@@ -58,15 +57,14 @@ public class CompanyModel {
 	}
 
 	public CompanyModel(String title, String description) {
-		this.id = UUID.randomUUID().toString();
 		this.xri = DEF_XRI;
 		this.title = title;
 		this.description = description;
 		this.projects = new ArrayList<ProjectModel>();
 	}
 
-	public CompanyModel(String xri, String title, String description) {
-		this.id = UUID.randomUUID().toString();
+	public CompanyModel(String id, String xri, String title, String description) {
+		this.id = id;
 		this.xri = xri;
 		this.title = title;
 		this.description = description;
@@ -155,29 +153,6 @@ public class CompanyModel {
 	}
 		
 	/******************************* Project *****************************/
-	/**
-	 * 
-	 * @param project
-	 */
-	public void addProject(ProjectModel project) {
-		if (project != null) {
-			this.projects.add(project);
-		}
-	}
-
-	/**
-	 * @param id
-	 * @return true if the project was removed
-	 */
-	public boolean removeProject(String id) {
-		for (ProjectModel _p : projects) {
-			if (_p.getId().equalsIgnoreCase(id)) {
-				return projects.remove(_p);
-			}
-		}
-		return false;
-	}
-	
 	public ArrayList<ProjectModel> getProjects() {
 		return projects;
 	}

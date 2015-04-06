@@ -47,14 +47,13 @@ public class ProjectModel {
 	private String xri;
 	private String title;
 	private String description;
-	private ArrayList<ProjectModel> projects;
+	private List<ProjectModel> projects;
 
 	// resources are kept as a reference by their ID; query the details on the resource service
 	private ArrayList<ResourceModel> resources;
 
 	/******************************* Constructors *****************************/
 	public ProjectModel() {
-		this.id = UUID.randomUUID().toString();
 		this.xri = DEF_XRI;
 		this.title = DEF_TITLE;
 		this.description = DEF_DESC;
@@ -63,7 +62,6 @@ public class ProjectModel {
 	}
 
 	public ProjectModel(String title, String description) {
-		this.id = UUID.randomUUID().toString();
 		this.xri = DEF_XRI;
 		this.title = title;
 		this.description = description;
@@ -71,8 +69,13 @@ public class ProjectModel {
 		this.setResources(new ArrayList<ResourceModel>());
 	}
 
-	public ProjectModel(String xri, String title, String description) {
-		this.id = UUID.randomUUID().toString();
+	public ProjectModel(
+		String id,
+		String xri, 
+		String title, 
+		String description
+	) {
+		this.id = id;
 		this.xri = xri;
 		this.title = title;
 		this.description = description;
@@ -85,12 +88,7 @@ public class ProjectModel {
 		this.xri = p.getXri();
 		this.title = p.getTitle();
 		this.description = p.getDescription();
-		this.projects = new ArrayList<ProjectModel>();
-		if (asTree == true) {
-			for (ProjectModel _p : p.getProjects()) {
-				this.projects.add(_p);
-			}
-		}
+		this.setProjects(p.getProjects());
 		this.setResources(p.getResources());
 	}
 
@@ -163,29 +161,6 @@ public class ProjectModel {
 	}
 
 	/******************************* Project *****************************/
-	/**
-	 * 
-	 * @param project
-	 */
-	public void addProject(ProjectModel project) {
-		if (project != null) {
-			this.projects.add(project);
-		}
-	}
-
-	/**
-	 * @param id
-	 * @return true if the project was removed
-	 */
-	public boolean removeProject(String id) {
-		for (ProjectModel _p : projects) {
-			if (_p.getId().equalsIgnoreCase(id)) {
-				return projects.remove(_p);
-			}
-		}
-		return false;
-	}
-	
 	public List<ProjectModel> getProjects() {
 		return projects;
 	}
@@ -194,33 +169,11 @@ public class ProjectModel {
 	 * @param newProjects
 	 *            the projects to set
 	 */
-	public void setProjects(ArrayList<ProjectModel> newProjects) {
+	public void setProjects(List<ProjectModel> newProjects) {
 		this.projects = newProjects;
 	}
 	
 	/******************************* Resource *****************************/
-	public void addResource(String resId) {
-		if (resId != null) {
-			resources.add(new ResourceModel(resId));
-		}
-	}
-	
-	public void addResource(ResourceModel res) {
-		if (res != null) {
-			resources.add(res);
-		}
-	}
-
-	public boolean removeResource(String resId) {
-		for (ResourceModel _res : resources) {
-			if (_res.getId().equals(resId)) {
-				resources.remove(_res);
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public ArrayList<ResourceModel> getResources() {
 		return resources;
 	}

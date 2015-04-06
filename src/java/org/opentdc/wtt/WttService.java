@@ -77,8 +77,8 @@ public class WttService extends GenericService<ServiceProvider> {
 	public List<CompanyModel> listCompanies(
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
 		return sp.listCompanies(false, query, queryType, position, size);
 	}
@@ -89,8 +89,8 @@ public class WttService extends GenericService<ServiceProvider> {
 	public List<CompanyModel> listCompaniesAsTree(
 			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size) {
+			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size) {
 		return sp.listCompanies(true, query, queryType, position, size);
 	}
 
@@ -146,9 +146,9 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String compId,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size"
-	) long size) {
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
 		return sp.listProjects(compId, query, queryType, position, size);
 	}
 
@@ -159,8 +159,8 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String compId,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
 		return sp.listAllProjects(compId, false, query, queryType, position, size);
 	}
@@ -172,8 +172,8 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String compId,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
 		return sp.listAllProjects(compId, true, query, queryType, position, size);
 	}
@@ -249,8 +249,8 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("pid") String projId,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
 		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") long position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") long size
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) throws NotFoundException {
 		return sp.listResources(projId, query, queryType, position, size);
 	}

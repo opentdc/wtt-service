@@ -35,8 +35,8 @@ public interface ServiceProvider {
 			boolean asTree,
 			String query, 
 			String queryType, 
-			long position, 
-			long size);
+			int position, 
+			int size);
 
 	public abstract CompanyModel createCompany(
 			CompanyModel company) 
@@ -62,16 +62,16 @@ public interface ServiceProvider {
 			String compId,
 			String query, 
 			String queryType, 
-			long position, 
-			long size);
+			int position, 
+			int size);
 
 	public abstract List<ProjectModel> listAllProjects(
 			String compId, 
 			boolean asTree,
 			String query, 
 			String queryType, 
-			long position, 
-			long size);
+			int position, 
+			int size);
 
 	public abstract ProjectModel createProject(
 			String compId, 
@@ -107,8 +107,8 @@ public interface ServiceProvider {
 			String projId,
 			String query, 
 			String queryType, 
-			long position, 
-			long size)
+			int position, 
+			int size)
 		throws NotFoundException;
 
 	public abstract String addResource(
