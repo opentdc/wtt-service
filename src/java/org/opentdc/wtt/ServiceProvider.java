@@ -32,7 +32,6 @@ import org.opentdc.service.exception.NotFoundException;
 public interface ServiceProvider {
 	
 	public abstract List<CompanyModel> listCompanies(
-			boolean asTree,
 			String query, 
 			String queryType, 
 			int position, 
@@ -103,7 +102,7 @@ public interface ServiceProvider {
 			String compId);
 
 	/******************************** resource ***********************/
-	public abstract List<ResourceModel> listResources(
+	public abstract List<ResourceRefModel> listResources(
 			String projId,
 			String query, 
 			String queryType, 

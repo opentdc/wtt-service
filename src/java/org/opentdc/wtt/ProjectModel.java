@@ -23,10 +23,7 @@
  */
 package org.opentdc.wtt;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,57 +36,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class ProjectModel {
-	public final static String DEF_XRI = "XRI_UNDEFINED";
-	public final static String DEF_TITLE = "TITLE_UNDEFINED";
-	public final static String DEF_DESC = "DESCRIPTION_UNDEFINED";
-
 	private String id;
-	private String xri;
 	private String title;
 	private String description;
-	private List<ProjectModel> projects;
-
-	// resources are kept as a reference by their ID; query the details on the resource service
-	private ArrayList<ResourceModel> resources;
 
 	/******************************* Constructors *****************************/
 	public ProjectModel() {
-		this.xri = DEF_XRI;
-		this.title = DEF_TITLE;
-		this.description = DEF_DESC;
-		this.projects = new ArrayList<ProjectModel>();
-		this.setResources(new ArrayList<ResourceModel>());
 	}
 
 	public ProjectModel(String title, String description) {
-		this.xri = DEF_XRI;
 		this.title = title;
 		this.description = description;
-		this.projects = new ArrayList<ProjectModel>();
-		this.setResources(new ArrayList<ResourceModel>());
-	}
-
-	public ProjectModel(
-		String id,
-		String xri, 
-		String title, 
-		String description
-	) {
-		this.id = id;
-		this.xri = xri;
-		this.title = title;
-		this.description = description;
-		this.projects = new ArrayList<ProjectModel>();
-		this.setResources(new ArrayList<ResourceModel>());
-	}
-	
-	public ProjectModel(ProjectModel p, boolean asTree) {
-		this.id = p.getId();
-		this.xri = p.getXri();
-		this.title = p.getTitle();
-		this.description = p.getDescription();
-		this.setProjects(p.getProjects());
-		this.setResources(p.getResources());
 	}
 
 	/********************************** ID *****************************/
@@ -100,32 +57,12 @@ public class ProjectModel {
 		return id;
 	}
 
-	public void setId() {
-		this.id = UUID.randomUUID().toString();
-	}
-
 	/**
 	 * @param id
 	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/********************************** XRI *****************************/
-	/**
-	 * @return the xri
-	 */
-	public String getXri() {
-		return xri;
-	}
-
-	/**
-	 * @param xri
-	 *            the xri to set
-	 */
-	public void setXri(String xri) {
-		this.xri = xri;
 	}
 
 	/********************************** Title *****************************/
@@ -160,28 +97,6 @@ public class ProjectModel {
 		this.description = description;
 	}
 
-	/******************************* Project *****************************/
-	public List<ProjectModel> getProjects() {
-		return projects;
-	}
-
-	/**
-	 * @param newProjects
-	 *            the projects to set
-	 */
-	public void setProjects(List<ProjectModel> newProjects) {
-		this.projects = newProjects;
-	}
-	
-	/******************************* Resource *****************************/
-	public ArrayList<ResourceModel> getResources() {
-		return resources;
-	}
-
-	public void setResources(ArrayList<ResourceModel> resources) {
-		this.resources = resources;
-	}
-	
 	/********************************** Comparator *****************************/
 	public static Comparator<ProjectModel> ProjectComparator = new Comparator<ProjectModel>() {
 

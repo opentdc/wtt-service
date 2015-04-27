@@ -23,9 +23,7 @@
  */
 package org.opentdc.wtt;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -38,52 +36,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class CompanyModel {
-	public final static String DEF_XRI = "XRI_UNDEFINED";
-	public final static String DEF_TITLE = "TITLE_UNDEFINED";
-	public final static String DEF_DESC = "DESCRIPTION_UNDEFINED";
-
 	private String id;
-	private String xri;
 	private String title;
 	private String description;
-	private ArrayList<ProjectModel> projects;
 
 	/******************************* Constructors *****************************/
 	public CompanyModel() {
-		this.xri = DEF_XRI;
-		this.title = DEF_TITLE;
-		this.description = DEF_DESC;
-		this.projects = new ArrayList<ProjectModel>();
 	}
 
 	public CompanyModel(String title, String description) {
-		this.xri = DEF_XRI;
 		this.title = title;
 		this.description = description;
-		this.projects = new ArrayList<ProjectModel>();
-	}
-
-	public CompanyModel(String id, String xri, String title, String description) {
-		this.id = id;
-		this.xri = xri;
-		this.title = title;
-		this.description = description;
-		this.projects = new ArrayList<ProjectModel>();
 	}
 	
-	public CompanyModel(CompanyModel c, boolean asTree) {
-		this.id = c.getId();
-		this.xri = c.getXri();
-		this.title = c.getTitle();
-		this.description = c.getDescription();
-		this.projects = new ArrayList<ProjectModel>();
-		if (asTree == true) {
-			for (ProjectModel _p : c.getProjects()) {
-				this.projects.add(_p);
-			}
-		}
-	}
-
 	/******************************* ID *****************************/
 	/**
 	 * @return the id
@@ -92,32 +57,12 @@ public class CompanyModel {
 		return id;
 	}
 
-	public void setId() {
-		this.id = UUID.randomUUID().toString();
-	}
-
 	/**
 	 * @param id
 	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/******************************* XRI *****************************/
-	/**
-	 * @return the xri
-	 */
-	public String getXri() {
-		return xri;
-	}
-
-	/**
-	 * @param xri
-	 *            the xri to set
-	 */
-	public void setXri(String xri) {
-		this.xri = xri;
 	}
 
 	/******************************* Title *****************************/
@@ -151,20 +96,7 @@ public class CompanyModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-		
-	/******************************* Project *****************************/
-	public ArrayList<ProjectModel> getProjects() {
-		return projects;
-	}
-
-	/**
-	 * @param projects
-	 *            the projects to set
-	 */
-	public void setProjects(ArrayList<ProjectModel> newProjects) {
-		projects = newProjects;
-	}
-	
+			
 	/******************************* Comparator *****************************/
 	public static Comparator<CompanyModel> CompanyComparator = new Comparator<CompanyModel>() {
 

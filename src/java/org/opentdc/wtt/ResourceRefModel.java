@@ -23,30 +23,30 @@
  */
 package org.opentdc.wtt;
 
-import java.util.UUID;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * A Resource.
- * We only keep a reference (= ID) as the foreign key to a resource service.
+ * A Reference to a Resource.
+ * We only keep a reference (= ID) as the foreign key to a resource service
+ * plus two commonly used derived attributes firstName and lastName.
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class ResourceModel {
+public class ResourceRefModel {
 	private String id;
+	private String firstName;
+	private String lastName;
 
 	/******************************* Constructors *****************************/
-	public ResourceModel(String id) {
-		this.id = id;
+	public ResourceRefModel() {
 	}
-
-	// only for testing purposes, where the foreign key is not relevant
-	public ResourceModel() {
-		this.id = UUID.randomUUID().toString();
+	
+	public ResourceRefModel(String firstName, String lastName) {
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 	}
 
 	/********************************** ID *****************************/
@@ -57,16 +57,39 @@ public class ResourceModel {
 		return id;
 	}
 
-	// only for testing purposes, where the foreign key is not relevant
-	public void setId() {
-		this.id = UUID.randomUUID().toString();
-	}
-
 	/**
 	 * @param id
 	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }

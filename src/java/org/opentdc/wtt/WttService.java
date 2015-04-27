@@ -80,20 +80,9 @@ public class WttService extends GenericService<ServiceProvider> {
 		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
 		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) {
-		return sp.listCompanies(false, query, queryType, position, size);
+		return sp.listCompanies(query, queryType, position, size);
 	}
 	
-	@GET
-	@Path("/astree")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<CompanyModel> listCompaniesAsTree(
-			@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-			@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-			@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
-			@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size) {
-		return sp.listCompanies(true, query, queryType, position, size);
-	}
-
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -244,7 +233,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	@GET
 	@Path("/{cid}/project/{pid}/resource")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ResourceModel> listResources(
+	public List<ResourceRefModel> listResources(
 		@PathParam("cid") String compId, 
 		@PathParam("pid") String projId,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
