@@ -69,12 +69,6 @@ public interface ServiceProvider {
 			ProjectModel project)
 		throws DuplicateException;
 	
-	public abstract ProjectModel createProjectAsSubproject(
-			String compId, 
-			String projId, 
-			ProjectModel project)
-		throws DuplicateException;
-
 	public abstract ProjectModel readProject(
 			String projId)
 		throws NotFoundException;
@@ -92,6 +86,44 @@ public interface ServiceProvider {
 
 	public abstract int countProjects(
 			String compId);
+	
+	/************************* subprojects *****************************/
+	public abstract List<ProjectModel> listSubprojects(
+			String compId,
+			String projId,
+			String query, 
+			String queryType, 
+			int position, 
+			int size);
+
+	public abstract ProjectModel createSubproject(
+			String compId, 
+			String projId,
+			ProjectModel project)
+		throws DuplicateException;
+	
+	public abstract ProjectModel readSubproject(
+			String compId,
+			String projId,
+			String subprojId)
+		throws NotFoundException;
+
+	public abstract ProjectModel updateSubproject(
+			String compId,
+			String projId,
+			String subprojId,
+			ProjectModel project
+	) throws NotFoundException;
+
+	public abstract void deleteSubproject(
+		String compId, 
+		String projId,
+		String subprojId
+	) throws NotFoundException, InternalServerErrorException;
+
+	public abstract int countSubprojects(
+			String compId,
+			String projId);
 
 	/******************************** resource ***********************/
 	public abstract List<ResourceRefModel> listResources(

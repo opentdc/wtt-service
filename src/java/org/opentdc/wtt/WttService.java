@@ -151,18 +151,6 @@ public class WttService extends GenericService<ServiceProvider> {
 	) throws DuplicateException, NotFoundException {
 		return sp.createProject(compId, project);
 	}
-
-	@POST
-	@Path("/{cid}/project/{pid}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public ProjectModel createProject(
-		@PathParam("cid") String compId, 
-		@PathParam("pid") String projId,
-		ProjectModel project
-	) throws DuplicateException {
-		return sp.createProjectAsSubproject(compId, projId, project);
-	}
 	
 	@GET
 	@Path("/{cid}/project/{pid}")
@@ -203,6 +191,75 @@ public class WttService extends GenericService<ServiceProvider> {
 		return sp.countProjects(compId);
 	}
 
+	/********************************** subproject ***************************************/
+	@GET
+	@Path("/{cid}/project/{pid}/project")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ProjectModel> listSubProjects(
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId,
+		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
+		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
+		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
+		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
+	) {
+		return sp.listSubprojects(compId, projId, query, queryType, position, size);
+	}
+
+	@POST
+	@Path("/{cid}/project/{pid}/project")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProjectModel createSubProject(
+		@PathParam("cid") String compId, 
+		@PathParam("pid") String projId,
+		ProjectModel project
+	) throws DuplicateException {
+		return sp.createSubproject(compId, projId, project);
+	}
+	
+	@GET
+	@Path("/{cid}/project/{pid}/project/{spid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProjectModel readSubproject(
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId,
+		@PathParam("spid") String subprojId
+	) throws NotFoundException {
+		return sp.readSubproject(compId, projId, subprojId);
+	}
+
+	@PUT
+	@Path("/{cid}/project/{pid}/project/{spid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProjectModel updateSubproject(
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId,
+		@PathParam("spid") String subprojId,
+		ProjectModel project
+	) throws NotFoundException {
+		return sp.updateSubproject(compId, projId, subprojId, project);
+	}
+
+	@DELETE
+	@Path("/{cid}/project/{pid}/project/{spid}")
+	public void deleteProject(
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId,
+		@PathParam("spid") String subprojId
+	) throws NotFoundException, InternalServerErrorException {
+		sp.deleteSubproject(compId, projId, subprojId);
+	}
+
+	@GET
+	@Path("/{cid}/project/{pid}/project/count")
+	public int countProjects(
+		@PathParam("cid") String compId,
+		@PathParam("pid") String projId
+	) {
+		return sp.countSubprojects(compId, projId);
+	}
 	/******************************** resource *****************************************/
 	@GET
 	@Path("/{cid}/project/{pid}/resource")
