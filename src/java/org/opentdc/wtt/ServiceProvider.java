@@ -64,14 +64,6 @@ public interface ServiceProvider {
 			int position, 
 			int size);
 
-	public abstract List<ProjectModel> listAllProjects(
-			String compId, 
-			boolean asTree,
-			String query, 
-			String queryType, 
-			int position, 
-			int size);
-
 	public abstract ProjectModel createProject(
 			String compId, 
 			ProjectModel project)

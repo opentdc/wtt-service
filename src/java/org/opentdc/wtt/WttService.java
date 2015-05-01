@@ -141,32 +141,6 @@ public class WttService extends GenericService<ServiceProvider> {
 		return sp.listProjects(compId, query, queryType, position, size);
 	}
 
-	@GET
-	@Path("/{cid}/project/flat")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProjectModel> listAllProjectsFlat(
-		@PathParam("cid") String compId,
-		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
-	) {
-		return sp.listAllProjects(compId, false, query, queryType, position, size);
-	}
-
-	@GET
-	@Path("/{cid}/project/astree")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ProjectModel> listAllProjectsAsTree(
-		@PathParam("cid") String compId,
-		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
-		@DefaultValue(DEFAULT_QUERY_TYPE) @QueryParam("queryType") String queryType,
-		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
-		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
-	) {
-		return sp.listAllProjects(compId, true, query, queryType, position, size);
-	}
-
 	@POST
 	@Path("/{cid}/project")
 	@Consumes(MediaType.APPLICATION_JSON)
