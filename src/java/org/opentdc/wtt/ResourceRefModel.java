@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ResourceRefModel {
 	private String id;
+	private String resourceId;
 	private String firstName;
 	private String lastName;
 
@@ -44,7 +45,8 @@ public class ResourceRefModel {
 	public ResourceRefModel() {
 	}
 	
-	public ResourceRefModel(String firstName, String lastName) {
+	public ResourceRefModel(String resid, String firstName, String lastName) {
+		this.setResourceId(resid);
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 	}
@@ -65,6 +67,14 @@ public class ResourceRefModel {
 		this.id = id;
 	}
 
+	public String getResourceId() {
+		return resourceId;
+	}
+
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
+	}
+	
 	/**
 	 * @return the firstName
 	 */
