@@ -1,5 +1,5 @@
 /**
- * The MIT License (MIT)
+  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Arbalo AG
  *
@@ -101,6 +101,12 @@ public class CompanyModel {
 	public static Comparator<CompanyModel> CompanyComparator = new Comparator<CompanyModel>() {
 
 		public int compare(CompanyModel company1, CompanyModel company2) {
+			if (company1.getTitle() == null) {
+				return -1;
+			}
+			if (company2.getTitle() == null) {
+				return 1;
+			}
 
 			String _companyTitle1 = company1.getTitle().toUpperCase();
 			String _companyTitle2 = company2.getTitle().toUpperCase();
