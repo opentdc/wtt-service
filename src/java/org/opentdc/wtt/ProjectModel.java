@@ -102,6 +102,13 @@ public class ProjectModel {
 
 		public int compare(ProjectModel project1, ProjectModel project2) {
 
+			if (project1.getTitle() == null) {
+				return -1;
+			}
+			if (project2.getTitle() == null) {
+				return 1;
+			}
+			
 			String _projectTitle1 = project1.getTitle().toUpperCase();
 			String _projectTitle2 = project2.getTitle().toUpperCase();
 
