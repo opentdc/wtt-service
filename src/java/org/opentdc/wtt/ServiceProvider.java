@@ -54,8 +54,6 @@ public interface ServiceProvider {
 			String id
 	) throws NotFoundException, InternalServerErrorException;
 
-	public abstract int countCompanies();
-
 	/************************* projects *****************************/
 	public abstract List<ProjectModel> listProjects(
 			String compId,
@@ -70,6 +68,7 @@ public interface ServiceProvider {
 		throws DuplicateException;
 	
 	public abstract ProjectModel readProject(
+			String compId,
 			String projId)
 		throws NotFoundException;
 
@@ -83,9 +82,6 @@ public interface ServiceProvider {
 		String compId, 
 		String projId
 	) throws NotFoundException, InternalServerErrorException;
-
-	public abstract int countProjects(
-			String compId);
 	
 	/************************* subprojects *****************************/
 	public abstract List<ProjectModel> listSubprojects(
@@ -121,12 +117,9 @@ public interface ServiceProvider {
 		String subprojId
 	) throws NotFoundException, InternalServerErrorException;
 
-	public abstract int countSubprojects(
-			String compId,
-			String projId);
-
 	/******************************** resource ***********************/
 	public abstract List<ResourceRefModel> listResources(
+			String compId,
 			String projId,
 			String query, 
 			String queryType, 
@@ -135,16 +128,14 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract String addResource(
+			String compId,
 			String projId, 
-			String resourceId)
+			ResourceRefModel resourceRef)
 		throws NotFoundException, DuplicateException;
 
 	public abstract void removeResource(
+			String compId,
 			String projId, 
 			String resourceId)
-		throws NotFoundException;
-
-	public abstract int countResources(
-			String projId)
 		throws NotFoundException;
 }
