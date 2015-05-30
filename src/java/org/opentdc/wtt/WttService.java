@@ -43,10 +43,14 @@ import javax.ws.rs.core.MediaType;
 
 
 
+
+
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
+import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
+import org.opentdc.service.exception.ValidationException;
 
 @Path("/api/company")
 public class WttService extends GenericService<ServiceProvider> {
@@ -88,7 +92,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel createCompany(
 		CompanyModel company
-	) throws DuplicateException {
+	) throws DuplicateException, ValidationException {
 		return sp.createCompany(company); 
 	}
 
@@ -108,7 +112,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	public CompanyModel updateCompany(
 		@PathParam("cid") String cid,
 		CompanyModel company
-	) throws NotFoundException {
+	) throws NotFoundException, NotAllowedException {
 		return sp.updateCompany(cid, company);
 	}
 
@@ -141,7 +145,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	public ProjectModel createProject(
 		@PathParam("cid") String cid, 
 		ProjectModel project
-	) throws DuplicateException, NotFoundException {
+	) throws DuplicateException, ValidationException {
 		return sp.createProject(cid, project);
 	}
 	
@@ -163,7 +167,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid,
 		@PathParam("pid") String pid,
 		ProjectModel project
-	) throws NotFoundException {
+	) throws NotFoundException, NotAllowedException {
 		return sp.updateProject(cid, pid, project);
 	}
 
@@ -199,7 +203,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid,
 		ProjectModel project
-	) throws DuplicateException {
+	) throws DuplicateException, ValidationException {
 		return sp.createSubproject(cid, pid, project);
 	}
 	
@@ -223,7 +227,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("pid") String pid,
 		@PathParam("spid") String spid,
 		ProjectModel project
-	) throws NotFoundException {
+	) throws NotFoundException, NotAllowedException {
 		return sp.updateSubproject(cid, pid, spid, project);
 	}
 
@@ -258,11 +262,11 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Path("/{cid}/project/{pid}/resource")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String addResource(
+	public ResourceRefModel addResource(
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid, 
 		ResourceRefModel resourceRef
-	) throws NotFoundException, DuplicateException {
+	) throws NotFoundException, DuplicateException, ValidationException {
 		return sp.addResource(cid, pid, resourceRef);
 	}
 
@@ -275,7 +279,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid, 
 		@PathParam("rid") String rid
-	) throws NotFoundException {
+	) throws NotFoundException, InternalServerErrorException {
 		sp.removeResource(cid, pid, rid);
 	}
 }

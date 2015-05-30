@@ -24,6 +24,7 @@
 package org.opentdc.wtt;
 
 import java.util.Comparator;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,6 +40,10 @@ public class ProjectModel {
 	private String id;
 	private String title;
 	private String description;
+	private Date createdAt;
+	private String createdBy;
+	private Date modifiedAt;
+	private String modifiedBy;
 
 	/******************************* Constructors *****************************/
 	public ProjectModel() {
@@ -119,4 +124,36 @@ public class ProjectModel {
 			// return _projectTitle2.compareTo(_projectTitle1);
 		}
 	};
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
 }

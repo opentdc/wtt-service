@@ -27,7 +27,9 @@ import java.util.List;
 
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
+import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
+import org.opentdc.service.exception.ValidationException;
 
 public interface ServiceProvider {
 	
@@ -39,7 +41,7 @@ public interface ServiceProvider {
 
 	public abstract CompanyModel createCompany(
 			CompanyModel company) 
-					throws DuplicateException;
+					throws DuplicateException, ValidationException;
 
 	public abstract CompanyModel readCompany(
 			String id) 
@@ -48,7 +50,7 @@ public interface ServiceProvider {
 	public abstract CompanyModel updateCompany(
 			String compId,
 			CompanyModel company
-	)  throws NotFoundException;
+	)  throws NotFoundException, NotAllowedException;
 
 	public abstract void deleteCompany(
 			String id
@@ -65,7 +67,7 @@ public interface ServiceProvider {
 	public abstract ProjectModel createProject(
 			String compId, 
 			ProjectModel project)
-		throws DuplicateException;
+		throws DuplicateException, ValidationException;
 	
 	public abstract ProjectModel readProject(
 			String compId,
@@ -76,7 +78,7 @@ public interface ServiceProvider {
 			String compId,
 			String projId,
 			ProjectModel project
-	) throws NotFoundException;
+	) throws NotFoundException, NotAllowedException;
 
 	public abstract void deleteProject(
 		String compId, 
@@ -96,7 +98,7 @@ public interface ServiceProvider {
 			String compId, 
 			String projId,
 			ProjectModel project)
-		throws DuplicateException;
+		throws DuplicateException, ValidationException;
 	
 	public abstract ProjectModel readSubproject(
 			String compId,
@@ -109,7 +111,7 @@ public interface ServiceProvider {
 			String projId,
 			String subprojId,
 			ProjectModel project
-	) throws NotFoundException;
+	) throws NotFoundException, NotAllowedException;
 
 	public abstract void deleteSubproject(
 		String compId, 
@@ -127,15 +129,15 @@ public interface ServiceProvider {
 			int size)
 		throws NotFoundException;
 
-	public abstract String addResource(
+	public abstract ResourceRefModel addResource(
 			String compId,
 			String projId, 
 			ResourceRefModel resourceRef)
-		throws NotFoundException, DuplicateException;
+		throws NotFoundException, DuplicateException, ValidationException;
 
 	public abstract void removeResource(
 			String compId,
 			String projId, 
 			String resourceId)
-		throws NotFoundException;
+		throws NotFoundException, InternalServerErrorException;
 }

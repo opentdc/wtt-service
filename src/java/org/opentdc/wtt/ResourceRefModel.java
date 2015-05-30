@@ -23,6 +23,8 @@
  */
 package org.opentdc.wtt;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,6 +42,10 @@ public class ResourceRefModel {
 	private String resourceId;
 	private String firstName;
 	private String lastName;
+	private Date createdAt;
+	private String createdBy;
+	private Date modifiedAt;
+	private String modifiedBy;
 
 	/******************************* Constructors *****************************/
 	public ResourceRefModel() {
@@ -101,5 +107,37 @@ public class ResourceRefModel {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Date modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 }
