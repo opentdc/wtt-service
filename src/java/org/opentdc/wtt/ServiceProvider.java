@@ -85,6 +85,10 @@ public interface ServiceProvider {
 		String projId
 	) throws NotFoundException, InternalServerErrorException;
 	
+	public abstract ProjectTreeNodeModel readAsTree(
+			String compId)
+		throws NotFoundException;
+	
 	/************************* subprojects *****************************/
 	public abstract List<ProjectModel> listSubprojects(
 			String compId,

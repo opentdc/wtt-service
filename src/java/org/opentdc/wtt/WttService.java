@@ -123,6 +123,15 @@ public class WttService extends GenericService<ServiceProvider> {
 	) throws NotFoundException, InternalServerErrorException {
 		sp.deleteCompany(cid);
 	}
+	
+	@GET
+	@Path("/{cid}/astree")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ProjectTreeNodeModel readAsTree(
+			@PathParam("cid") String cid
+			) throws NotFoundException {
+		return sp.readAsTree(cid);
+	}
 
 	/********************************** project ***************************************/
 	@GET
