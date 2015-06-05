@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class CompanyModel {
-	private String id;
+	private String id;			// sortable
 	private String title;
 	private String description;
 	private Date createdAt;
@@ -102,28 +102,6 @@ public class CompanyModel {
 		this.description = description;
 	}
 			
-	/******************************* Comparator *****************************/
-	public static Comparator<CompanyModel> CompanyComparator = new Comparator<CompanyModel>() {
-
-		public int compare(CompanyModel company1, CompanyModel company2) {
-			if (company1.getTitle() == null) {
-				return -1;
-			}
-			if (company2.getTitle() == null) {
-				return 1;
-			}
-
-			String _companyTitle1 = company1.getTitle().toUpperCase();
-			String _companyTitle2 = company2.getTitle().toUpperCase();
-
-			// ascending order
-			return _companyTitle1.compareTo(_companyTitle2);
-
-			// descending order
-			// return _companyTitle2.compareTo(_companyTitle1);
-		}
-	};
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -155,4 +133,26 @@ public class CompanyModel {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
+	
+	/******************************* Comparator *****************************/
+	public static Comparator<CompanyModel> CompanyComparator = new Comparator<CompanyModel>() {
+
+		public int compare(CompanyModel obj1, CompanyModel obj2) {
+			if (obj1.getId() == null) {
+				return -1;
+			}
+			if (obj2.getId() == null) {
+				return 1;
+			}
+
+			String _attr1 = obj1.getId();
+			String _attr2 = obj2.getId();
+
+			// ascending order
+			return _attr1.compareTo(_attr2);
+
+			// descending order
+			// return _attr2.compareTo(_attr1);
+		}
+	};
 }

@@ -23,6 +23,7 @@
  */
 package org.opentdc.wtt;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class ResourceRefModel {
-	private String id;
+	private String id;				// sortable
 	private String resourceId;
 	private String firstName;
 	private String lastName;
@@ -140,4 +141,26 @@ public class ResourceRefModel {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
+	
+	/******************************* Comparator *****************************/
+	public static Comparator<ResourceRefModel> ResourceRefComparator = new Comparator<ResourceRefModel>() {
+
+		public int compare(ResourceRefModel obj1, ResourceRefModel obj2) {
+			if (obj1.getId() == null) {
+				return -1;
+			}
+			if (obj2.getId() == null) {
+				return 1;
+			}
+
+			String _attr1 = obj1.getId();
+			String _attr2 = obj2.getId();
+
+			// ascending order
+			return _attr1.compareTo(_attr2);
+
+			// descending order
+			// return _attr2.compareTo(_attr1);
+		}
+	};
 }

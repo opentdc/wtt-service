@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 public class ProjectModel {
-	private String id;
+	private String id;				// sortable
 	private String title;
 	private String description;
 	private Date createdAt;
@@ -102,29 +102,6 @@ public class ProjectModel {
 		this.description = description;
 	}
 
-	/********************************** Comparator *****************************/
-	public static Comparator<ProjectModel> ProjectComparator = new Comparator<ProjectModel>() {
-
-		public int compare(ProjectModel project1, ProjectModel project2) {
-
-			if (project1.getTitle() == null) {
-				return -1;
-			}
-			if (project2.getTitle() == null) {
-				return 1;
-			}
-			
-			String _projectTitle1 = project1.getTitle().toUpperCase();
-			String _projectTitle2 = project2.getTitle().toUpperCase();
-
-			// ascending order
-			return _projectTitle1.compareTo(_projectTitle2);
-
-			// descending order
-			// return _projectTitle2.compareTo(_projectTitle1);
-		}
-	};
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -156,4 +133,26 @@ public class ProjectModel {
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
+	
+	/******************************* Comparator *****************************/
+	public static Comparator<ProjectModel> ProjectComparator = new Comparator<ProjectModel>() {
+
+		public int compare(ProjectModel obj1, ProjectModel obj2) {
+			if (obj1.getId() == null) {
+				return -1;
+			}
+			if (obj2.getId() == null) {
+				return 1;
+			}
+
+			String _attr1 = obj1.getId();
+			String _attr2 = obj2.getId();
+
+			// ascending order
+			return _attr1.compareTo(_attr2);
+
+			// descending order
+			// return _attr2.compareTo(_attr1);
+		}
+	};
 }
