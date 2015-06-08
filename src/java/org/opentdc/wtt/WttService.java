@@ -41,14 +41,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 // import com.wordnik.swagger.annotations.*;
 
-
-
-
-
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
-import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
 import org.opentdc.service.exception.ValidationException;
 
@@ -112,7 +107,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	public CompanyModel updateCompany(
 		@PathParam("cid") String cid,
 		CompanyModel company
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.updateCompany(cid, company);
 	}
 
@@ -176,7 +171,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("cid") String cid,
 		@PathParam("pid") String pid,
 		ProjectModel project
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.updateProject(cid, pid, project);
 	}
 
@@ -236,7 +231,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@PathParam("pid") String pid,
 		@PathParam("spid") String spid,
 		ProjectModel project
-	) throws NotFoundException, NotAllowedException {
+	) throws NotFoundException, ValidationException {
 		return sp.updateSubproject(cid, pid, spid, project);
 	}
 

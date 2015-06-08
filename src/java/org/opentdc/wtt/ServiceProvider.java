@@ -27,7 +27,6 @@ import java.util.List;
 
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
-import org.opentdc.service.exception.NotAllowedException;
 import org.opentdc.service.exception.NotFoundException;
 import org.opentdc.service.exception.ValidationException;
 
@@ -50,7 +49,7 @@ public interface ServiceProvider {
 	public abstract CompanyModel updateCompany(
 			String compId,
 			CompanyModel company
-	)  throws NotFoundException, NotAllowedException;
+	)  throws NotFoundException, ValidationException;
 
 	public abstract void deleteCompany(
 			String id
@@ -78,7 +77,7 @@ public interface ServiceProvider {
 			String compId,
 			String projId,
 			ProjectModel project
-	) throws NotFoundException, NotAllowedException;
+	) throws NotFoundException, ValidationException;
 
 	public abstract void deleteProject(
 		String compId, 
@@ -115,7 +114,7 @@ public interface ServiceProvider {
 			String projId,
 			String subprojId,
 			ProjectModel project
-	) throws NotFoundException, NotAllowedException;
+	) throws NotFoundException, ValidationException;
 
 	public abstract void deleteSubproject(
 		String compId, 
