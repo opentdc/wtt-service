@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CompanyModel {
 	private String id;			// sortable
-	private String title;
+	private String title;		// mandatory
 	private String description;
 	private Date createdAt;
 	private String createdBy;
