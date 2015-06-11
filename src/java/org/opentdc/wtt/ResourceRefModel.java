@@ -40,9 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ResourceRefModel {
 	private String id;				// sortable
-	private String resourceId;
-	private String firstName;
-	private String lastName;
+	private String resourceId;		// mandatory
+	private String firstName;		// mandatory
+	private String lastName;		// mandatory
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
