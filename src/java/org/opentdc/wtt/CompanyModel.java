@@ -40,6 +40,7 @@ public class CompanyModel {
 	private String id;			// sortable
 	private String title;		// mandatory
 	private String description;
+	private String orgId;	// mandatory
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
@@ -49,9 +50,10 @@ public class CompanyModel {
 	public CompanyModel() {
 	}
 
-	public CompanyModel(String title, String description) {
+	public CompanyModel(String title, String description, String orgId) {
 		this.title = title;
 		this.description = description;
+		this.orgId = orgId;
 	}
 	
 	/******************************* ID *****************************/
@@ -134,6 +136,20 @@ public class CompanyModel {
 		this.modifiedBy = modifiedBy;
 	}
 	
+	/**
+	 * @return the orgId
+	 */
+	public String getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(String orgId) {
+		this.orgId = orgId;
+	}
+
 	/******************************* Comparator *****************************/
 	public static Comparator<CompanyModel> CompanyComparator = new Comparator<CompanyModel>() {
 
