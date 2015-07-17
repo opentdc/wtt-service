@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * A Reference to a Resource.
- * We only keep a reference (= ID) as the foreign key to a resource service
+ * We only keep a reference (= ID) as the foreign key to a ResourceModel in ResourcesService
  * plus two commonly used derived attributes firstName and lastName.
  *
  */
@@ -41,8 +41,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ResourceRefModel {
 	private String id;				// sortable
 	private String resourceId;		// mandatory
-	private String firstName;		// mandatory
-	private String lastName;		// mandatory
+	private String firstName;		// read-only, derived
+	private String lastName;		// read-only, derived
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
