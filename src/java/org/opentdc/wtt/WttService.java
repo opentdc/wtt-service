@@ -250,7 +250,7 @@ public class WttService extends GenericService<ServiceProvider> {
 	@GET
 	@Path("/{cid}/project/{pid}/resource")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ResourceRefModel> listResources(
+	public List<ResourceRefModel> listResourceRefs(
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid,
 		@DefaultValue(DEFAULT_QUERY) @QueryParam("query") String query,
@@ -258,7 +258,7 @@ public class WttService extends GenericService<ServiceProvider> {
 		@DefaultValue(DEFAULT_POSITION) @QueryParam("position") int position,
 		@DefaultValue(DEFAULT_SIZE) @QueryParam("size") int size
 	) throws NotFoundException {
-		return sp.listResources(cid, pid, query, queryType, position, size);
+		return sp.listResourceRefs(cid, pid, query, queryType, position, size);
 	}
 
 	// add a resourceRef to project pid
@@ -266,12 +266,12 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Path("/{cid}/project/{pid}/resource")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResourceRefModel addResource(
+	public ResourceRefModel addResourceRef(
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid, 
 		ResourceRefModel resourceRef
 	) throws NotFoundException, DuplicateException, ValidationException {
-		return sp.addResource(cid, pid, resourceRef);
+		return sp.addResourceRef(cid, pid, resourceRef);
 	}
 
 	// remove resourceRef rid from project pid
@@ -279,11 +279,11 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Path("/{cid}/project/{pid}/resource/{rid}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deleteResource(
+	public void deleteResourceRef(
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid, 
 		@PathParam("rid") String rid
 	) throws NotFoundException, InternalServerErrorException {
-		sp.removeResource(cid, pid, rid);
+		sp.removeResourceRef(cid, pid, rid);
 	}
 }

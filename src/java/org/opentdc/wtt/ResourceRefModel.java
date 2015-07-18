@@ -41,8 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ResourceRefModel {
 	private String id;				// sortable
 	private String resourceId;		// mandatory
-	private String firstName;		// read-only, derived
-	private String lastName;		// read-only, derived
+	private String resourceName;	// read-only, derived
 	private Date createdAt;
 	private String createdBy;
 	private Date modifiedAt;
@@ -52,10 +51,8 @@ public class ResourceRefModel {
 	public ResourceRefModel() {
 	}
 	
-	public ResourceRefModel(String resid, String firstName, String lastName) {
-		this.setResourceId(resid);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
+	public ResourceRefModel(String resourceId) {
+		this.setResourceId(resourceId);
 	}
 
 	/********************************** ID *****************************/
@@ -83,31 +80,17 @@ public class ResourceRefModel {
 	}
 	
 	/**
-	 * @return the firstName
+	 * @return the resourceName
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getResourceName() {
+		return resourceName;
 	}
 
 	/**
-	 * @param firstName the firstName to set
+	 * @param resourceName the resourceName to set
 	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
 	}
 
 	public Date getCreatedAt() {

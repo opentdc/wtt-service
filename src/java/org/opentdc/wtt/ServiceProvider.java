@@ -123,7 +123,7 @@ public interface ServiceProvider {
 	) throws NotFoundException, InternalServerErrorException;
 
 	/******************************** resource ***********************/
-	public abstract List<ResourceRefModel> listResources(
+	public abstract List<ResourceRefModel> listResourceRefs(
 			String compId,
 			String projId,
 			String query, 
@@ -132,13 +132,13 @@ public interface ServiceProvider {
 			int size)
 		throws NotFoundException;
 
-	public abstract ResourceRefModel addResource(
+	public abstract ResourceRefModel addResourceRef(
 			String compId,
 			String projId, 
 			ResourceRefModel resourceRef)
 		throws NotFoundException, DuplicateException, ValidationException;
 
-	public abstract void removeResource(
+	public abstract void removeResourceRef(
 			String compId,
 			String projId, 
 			String resourceId)
