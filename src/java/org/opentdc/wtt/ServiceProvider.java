@@ -25,6 +25,8 @@ package org.opentdc.wtt;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.opentdc.service.exception.DuplicateException;
 import org.opentdc.service.exception.InternalServerErrorException;
 import org.opentdc.service.exception.NotFoundException;
@@ -39,6 +41,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract CompanyModel createCompany(
+			HttpServletRequest request,
 			CompanyModel company) 
 					throws DuplicateException, ValidationException;
 
@@ -47,6 +50,7 @@ public interface ServiceProvider {
 					throws NotFoundException;
 
 	public abstract CompanyModel updateCompany(
+			HttpServletRequest request,
 			String compId,
 			CompanyModel company
 	)  throws NotFoundException, ValidationException;
@@ -64,6 +68,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract ProjectModel createProject(
+			HttpServletRequest request,
 			String compId, 
 			ProjectModel project)
 		throws DuplicateException, ValidationException;
@@ -74,6 +79,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract ProjectModel updateProject(
+			HttpServletRequest request,
 			String compId,
 			String projId,
 			ProjectModel project
@@ -98,6 +104,7 @@ public interface ServiceProvider {
 			int size);
 
 	public abstract ProjectModel createSubproject(
+			HttpServletRequest request,
 			String compId, 
 			String projId,
 			ProjectModel project)
@@ -110,6 +117,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract ProjectModel updateSubproject(
+			HttpServletRequest request,
 			String compId,
 			String projId,
 			String subprojId,
@@ -133,6 +141,7 @@ public interface ServiceProvider {
 		throws NotFoundException;
 
 	public abstract ResourceRefModel addResourceRef(
+			HttpServletRequest request,
 			String compId,
 			String projId, 
 			ResourceRefModel resourceRef)

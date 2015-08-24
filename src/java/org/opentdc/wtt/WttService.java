@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -40,6 +41,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 // import com.wordnik.swagger.annotations.*;
+
 
 import org.opentdc.service.GenericService;
 import org.opentdc.service.exception.DuplicateException;
@@ -86,9 +88,10 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel createCompany(
+		@Context HttpServletRequest request,
 		CompanyModel company
 	) throws DuplicateException, ValidationException {
-		return sp.createCompany(company); 
+		return sp.createCompany(request, company); 
 	}
 
 	@GET
@@ -105,10 +108,11 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public CompanyModel updateCompany(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid,
 		CompanyModel company
 	) throws NotFoundException, ValidationException {
-		return sp.updateCompany(cid, company);
+		return sp.updateCompany(request, cid, company);
 	}
 
 	@DELETE
@@ -147,10 +151,11 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel createProject(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid, 
 		ProjectModel project
 	) throws DuplicateException, ValidationException {
-		return sp.createProject(cid, project);
+		return sp.createProject(request, cid, project);
 	}
 	
 	@GET
@@ -168,11 +173,12 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel updateProject(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid,
 		@PathParam("pid") String pid,
 		ProjectModel project
 	) throws NotFoundException, ValidationException {
-		return sp.updateProject(cid, pid, project);
+		return sp.updateProject(request, cid, pid, project);
 	}
 
 	@DELETE
@@ -204,11 +210,12 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel createSubProject(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid,
 		ProjectModel project
 	) throws DuplicateException, ValidationException {
-		return sp.createSubproject(cid, pid, project);
+		return sp.createSubproject(request, cid, pid, project);
 	}
 	
 	@GET
@@ -227,12 +234,13 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProjectModel updateSubproject(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid,
 		@PathParam("pid") String pid,
 		@PathParam("spid") String spid,
 		ProjectModel project
 	) throws NotFoundException, ValidationException {
-		return sp.updateSubproject(cid, pid, spid, project);
+		return sp.updateSubproject(request, cid, pid, spid, project);
 	}
 
 	@DELETE
@@ -267,11 +275,12 @@ public class WttService extends GenericService<ServiceProvider> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResourceRefModel addResourceRef(
+		@Context HttpServletRequest request,
 		@PathParam("cid") String cid, 
 		@PathParam("pid") String pid, 
 		ResourceRefModel resourceRef
 	) throws NotFoundException, DuplicateException, ValidationException {
-		return sp.addResourceRef(cid, pid, resourceRef);
+		return sp.addResourceRef(request, cid, pid, resourceRef);
 	}
 
 	// remove resourceRef rid from project pid
